@@ -8,6 +8,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#1E3A8A"
     },
@@ -21,12 +22,11 @@
     "android": {
       "package": "com.spraxe.support",
       "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1E3A8A"
       }
     },
-    "plugins": [
-      "expo-image"
-    ],
+    "plugins": [],
     "extra": {}
   }
 }
