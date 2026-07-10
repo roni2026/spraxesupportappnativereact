@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Spraxe Support",
+    "slug": "spraxe-support",
+    "scheme": "spraxesupport",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#1E3A8A"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.spraxe.support"
+    },
+    "android": {
+      "package": "com.spraxe.support",
+      "adaptiveIcon": {
+        "backgroundColor": "#1E3A8A"
+      }
+    },
+    "plugins": [
+      "expo-image"
+    ],
+    "extra": {}
+  }
+}
