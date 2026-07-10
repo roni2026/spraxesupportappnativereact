@@ -26,7 +26,14 @@
         "backgroundColor": "#1E3A8A"
       }
     },
-    "plugins": [],
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "color": "#1E3A8A"
+        }
+      ]
+    ],
     "extra": {}
   }
 }

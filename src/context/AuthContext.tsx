@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from '
 import { supabase } from '../lib/supabase';
 import { AuthRepository, StaffAccessDeniedError } from '../data/AuthRepository';
 import { Profile } from '../types/models';
+import { syncPushToken } from '../lib/push';
 
 type AuthStatus = 'checking' | 'signedOut' | 'signedIn';
 
@@ -32,6 +33,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const staff = await AuthRepository.requireStaffProfile();
       setProfile(staff);
       setStatus('signedIn');
+      void syncPushToken();
     } catch {
       setStatus('signedOut');
     }
@@ -59,6 +61,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const staff = await AuthRepository.signInWithEmail(email.trim(), password);
       setProfile(staff);
       setStatus('signedIn');
+      void syncPushToken();
     } catch (e: any) {
       if (e instanceof StaffAccessDeniedError) setErrorMessage(e.message);
       else setErrorMessage(e?.message ?? 'Sign in failed. Check your credentials.');
