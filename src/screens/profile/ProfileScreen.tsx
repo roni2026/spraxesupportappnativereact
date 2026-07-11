@@ -4,8 +4,11 @@ import { useAuth } from '../../context/AuthContext';
 import { StatusBadge } from '../../components/CommonComponents';
 import { displayName } from '../../types/models';
 import { theme } from '../../theme/theme';
+import { useTranslation } from 'react-i18next';
+import LanguageToggle from '../../components/LanguageToggle';
 
 export default function ProfileScreen() {
+  const { t } = useTranslation();
   const { profile, signOut } = useAuth();
   if (!profile) return null;
 
@@ -18,13 +21,16 @@ export default function ProfileScreen() {
       <View style={{ height: 24 }} />
 
       <View style={styles.card}>
-        {profile.email ? <Text style={styles.row}>Email: {profile.email}</Text> : null}
-        {profile.phone ? <Text style={styles.row}>Phone: {profile.phone}</Text> : null}
+        {profile.email ? <Text style={styles.row}>{t('profile.email')}: {profile.email}</Text> : null}
+        {profile.phone ? <Text style={styles.row}>{t('profile.phone')}: {profile.phone}</Text> : null}
       </View>
+
+      <View style={{ height: 24 }} />
+      <LanguageToggle />
 
       <View style={{ height: 32 }} />
       <Pressable style={styles.signOut} onPress={signOut}>
-        <Text style={styles.signOutText}>Sign out</Text>
+        <Text style={styles.signOutText}>{t('profile.signOut')}</Text>
       </Pressable>
     </View>
   );

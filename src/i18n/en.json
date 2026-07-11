@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "products": "Products",
+    "customers": "Customers",
+    "profile": "Profile"
+  },
+  "dashboard": {
+    "overview": "Overview",
+    "products": "Products",
+    "totalOrders": "Total orders",
+    "customers": "Customers",
+    "pendingOrders": "Pending orders",
+    "openTickets": "Open tickets",
+    "inProgressChats": "In-progress chats",
+    "recentOrders": "Recent orders"
+  },
+  "orders": {
+    "orderNumber": "Order Number",
+    "status": "Status",
+    "total": "Total",
+    "paymentStatus": "Payment Status",
+    "customer": "Customer",
+    "updateStatus": "Update Status",
+    "searchOrderNumber": "Search order number",
+    "noOrdersFound": "No orders found.",
+    "all": "All",
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "processing": "Processing",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled"
+  },
+  "products": {
+    "name": "Name",
+    "price": "Price",
+    "stock": "Stock",
+    "active": "Active",
+    "featured": "Featured",
+    "edit": "Edit",
+    "delete": "Delete",
+    "addProduct": "Add Product",
+    "searchProducts": "Search products",
+    "noProductsYet": "No products yet. Tap + to add one.",
+    "deleteProduct": "Delete product?",
+    "deleteConfirmMsg": "\"{{name}}\" will be permanently removed from the catalog.",
+    "deleteLabel": "Delete"
+  },
+  "customers": {
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "role": "Role",
+    "status": "Status"
+  },
+  "support": {
+    "tickets": "Tickets",
+    "chat": "Chat",
+    "reply": "Reply",
+    "closeTicket": "Close Ticket",
+    "priority": "Priority"
+  },
+  "settings": {
+    "settings": "Settings",
+    "save": "Save",
+    "logout": "Logout"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "workEmail": "Work email",
+    "adminModeratorNote": "Only accounts with an admin or moderator role can access Spraxe Support.",
+    "spraxeSupport": "Spraxe Support",
+    "adminSignIn": "Admin & moderator sign in"
+  },
+  "profile": {
+    "signOut": "Sign out",
+    "email": "Email",
+    "phone": "Phone"
+  },
+  "common": {
+    "loading": "Loading",
+    "error": "Error",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "search": "Search"
+  },
+  "language": {
+    "english": "EN",
+    "bangla": "বাংলা",
+    "toggleLanguage": "Toggle Language"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "dashboard": "ড্যাশবোর্ড",
+    "orders": "অর্ডার",
+    "products": "পণ্য",
+    "customers": "ক্রেতা",
+    "profile": "প্রোফাইল"
+  },
+  "dashboard": {
+    "overview": "ওভারভিউ",
+    "products": "পণ্য",
+    "totalOrders": "মোট অর্ডার",
+    "customers": "ক্রেতা",
+    "pendingOrders": "অপেক্ষমান অর্ডার",
+    "openTickets": "খোলা টিকেট",
+    "inProgressChats": "চলমান চ্যাট",
+    "recentOrders": "সাম্প্রতিক অর্ডার"
+  },
+  "orders": {
+    "orderNumber": "অর্ডার নম্বর",
+    "status": "স্ট্যাটাস",
+    "total": "মোট",
+    "paymentStatus": "পেমেন্ট স্ট্যাটাস",
+    "customer": "ক্রেতা",
+    "updateStatus": "স্ট্যাটাস আপডেট",
+    "searchOrderNumber": "অর্ডার নম্বর সার্চ করুন",
+    "noOrdersFound": "কোন অর্ডার পাওয়া যায়নি।",
+    "all": "সব",
+    "pending": "অপেক্ষমান",
+    "confirmed": "নিশ্চিত",
+    "processing": "প্রসেসিং",
+    "delivered": "ডেলিভার হয়েছে",
+    "cancelled": "বাতিল"
+  },
+  "products": {
+    "name": "নাম",
+    "price": "মূল্য",
+    "stock": "স্টক",
+    "active": "সক্রিয়",
+    "featured": "ফিচার্ড",
+    "edit": "সম্পাদনা",
+    "delete": "মুছুন",
+    "addProduct": "পণ্য যোগ করুন",
+    "searchProducts": "পণ্য সার্চ করুন",
+    "noProductsYet": "কোন পণ্য নেই। যোগ করতে + ট্যাপ করুন।",
+    "deleteProduct": "পণ্য মুছবেন?",
+    "deleteConfirmMsg": "\"{{name}}\" ক্যাটালগ থেকে স্থায়ীভাবে মুছে ফেলা হবে।",
+    "deleteLabel": "মুছুন"
+  },
+  "customers": {
+    "name": "নাম",
+    "phone": "ফোন",
+    "email": "ইমেইল",
+    "role": "ভূমিকা",
+    "status": "স্ট্যাটাস"
+  },
+  "support": {
+    "tickets": "টিকেট",
+    "chat": "চ্যাট",
+    "reply": "উত্তর",
+    "closeTicket": "টিকেট বন্ধ করুন",
+    "priority": "অগ্রাধিকার"
+  },
+  "settings": {
+    "settings": "সেটিংস",
+    "save": "সংরক্ষণ",
+    "logout": "লগ আউট"
+  },
+  "auth": {
+    "signIn": "সাইন ইন",
+    "email": "ইমেইল",
+    "password": "পাসওয়ার্ড",
+    "workEmail": "কর্মস্থল ইমেইল",
+    "adminModeratorNote": "শুধুমাত্র অ্যাডমিন বা মডারেটর ভূমিকার অ্যাকাউন্ট স্প্র্যাক্স সাপোর্টে প্রবেশ করতে পারবে।",
+    "spraxeSupport": "স্প্র্যাক্স সাপোর্ট",
+    "adminSignIn": "অ্যাডমিন ও মডারেটর সাইন ইন"
+  },
+  "profile": {
+    "signOut": "সাইন আউট",
+    "email": "ইমেইল",
+    "phone": "ফোন"
+  },
+  "common": {
+    "loading": "লোড হচ্ছে",
+    "error": "ত্রুটি",
+    "retry": "আবার চেষ্টা করুন",
+    "cancel": "বাতিল",
+    "confirm": "নিশ্চিত করুন",
+    "search": "সার্চ"
+  },
+  "language": {
+    "english": "EN",
+    "bangla": "বাংলা",
+    "toggleLanguage": "ভাষা পরিবর্তন"
+  }
+}

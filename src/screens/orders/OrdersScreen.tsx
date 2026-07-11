@@ -7,10 +7,12 @@ import { OrderRow } from '../../types/models';
 import { EmptyState, LoadingIndicator, StatusBadge } from '../../components/CommonComponents';
 import { money, theme, titleCase } from '../../theme/theme';
 import { RootStackParamList } from '../../navigation/types';
+import { useTranslation } from 'react-i18next';
 
 const statusOptions = ['all', 'pending', 'confirmed', 'processing', 'delivered', 'cancelled'];
 
 export default function OrdersScreen() {
+  const { t } = useTranslation();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [orders, setOrders] = useState<OrderRow[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +35,7 @@ export default function OrdersScreen() {
       <TextInput
         value={query}
         onChangeText={setQuery}
-        placeholder="Search order number"
+        placeholder={t('orders.searchOrderNumber')}
         placeholderTextColor={theme.colors.onSurfaceMuted}
         style={styles.search}
       />
@@ -59,7 +61,7 @@ export default function OrdersScreen() {
       {isLoading ? (
         <LoadingIndicator />
       ) : orders.length === 0 ? (
-        <EmptyState message="No orders found." />
+        <EmptyState message={t('orders.noOrdersFound')} />
       ) : (
         <FlatList
           data={orders}

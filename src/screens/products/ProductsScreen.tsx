@@ -8,8 +8,10 @@ import { Product, displayPrice, thumbnailUrl } from '../../types/models';
 import { ConfirmDialog, EmptyState, FallbackImage, LoadingIndicator } from '../../components/CommonComponents';
 import { money, theme } from '../../theme/theme';
 import { RootStackParamList } from '../../navigation/types';
+import { useTranslation } from 'react-i18next';
 
 export default function ProductsScreen() {
+  const { t } = useTranslation();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -36,14 +38,14 @@ export default function ProductsScreen() {
       <TextInput
         value={query}
         onChangeText={setQuery}
-        placeholder="Search products"
+        placeholder={t('products.searchProducts')}
         placeholderTextColor={theme.colors.onSurfaceMuted}
         style={styles.search}
       />
       {isLoading ? (
         <LoadingIndicator />
       ) : products.length === 0 ? (
-        <EmptyState message="No products yet. Tap + to add one." />
+        <EmptyState message={t('products.noProductsYet')} />
       ) : (
         <FlatList
           data={products}
@@ -77,9 +79,9 @@ export default function ProductsScreen() {
 
       <ConfirmDialog
         visible={pendingDelete !== null}
-        title="Delete product?"
-        message={pendingDelete ? `"${pendingDelete.name}" will be permanently removed from the catalog.` : ''}
-        confirmLabel="Delete"
+        title={t('products.deleteProduct')}
+        message={pendingDelete ? t('products.deleteConfirmMsg', { name: pendingDelete.name }) : ''}
+        confirmLabel={t('products.deleteLabel')}
         onConfirm={() => pendingDelete && doDelete(pendingDelete)}
         onDismiss={() => setPendingDelete(null)}
       />

@@ -4,8 +4,10 @@ import {
 } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 import { theme } from '../../theme/theme';
+import { useTranslation } from 'react-i18next';
 
 export default function LoginScreen() {
+  const { t } = useTranslation();
   const { signIn, isSubmitting, errorMessage } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,14 +18,14 @@ export default function LoginScreen() {
       style={styles.container}
     >
       <View style={{ height: 64 }} />
-      <Text style={styles.title}>Spraxe Support</Text>
-      <Text style={styles.subtitle}>Admin & moderator sign in</Text>
+      <Text style={styles.title}>{t('auth.spraxeSupport')}</Text>
+      <Text style={styles.subtitle}>{t('auth.adminSignIn')}</Text>
       <View style={{ height: 40 }} />
 
       <TextInput
         value={email}
         onChangeText={setEmail}
-        placeholder="Work email"
+        placeholder={t('auth.workEmail')}
         placeholderTextColor={theme.colors.onSurfaceMuted}
         autoCapitalize="none"
         keyboardType="email-address"
@@ -33,7 +35,7 @@ export default function LoginScreen() {
       <TextInput
         value={password}
         onChangeText={setPassword}
-        placeholder="Password"
+        placeholder={t('auth.password')}
         placeholderTextColor={theme.colors.onSurfaceMuted}
         secureTextEntry
         style={styles.input}
@@ -50,13 +52,13 @@ export default function LoginScreen() {
         {isSubmitting ? (
           <ActivityIndicator color="#fff" />
         ) : (
-          <Text style={styles.buttonText}>Sign in</Text>
+          <Text style={styles.buttonText}>{t('auth.signIn')}</Text>
         )}
       </Pressable>
 
       <View style={{ height: 24 }} />
       <Text style={styles.note}>
-        Only accounts with an admin or moderator role can access Spraxe Support.
+        {t('auth.adminModeratorNote')}
       </Text>
     </KeyboardAvoidingView>
   );

@@ -7,6 +7,8 @@ import { DashboardStats, OrderRow } from '../../types/models';
 import { LoadingIndicator, StatCard, StatusBadge } from '../../components/CommonComponents';
 import { money, theme } from '../../theme/theme';
 import { RootStackParamList } from '../../navigation/types';
+import { useTranslation } from 'react-i18next';
+import LanguageToggle from '../../components/LanguageToggle';
 
 const emptyStats: DashboardStats = {
   products: 0, orders: 0, customers: 0, pendingOrders: 0, openTickets: 0, inProgressTickets: 0, pendingSellerApps: 0,
@@ -21,6 +23,7 @@ let dashboardCache: { data: DashboardCacheData; timestamp: number } | null = nul
 const CACHE_TTL = 30_000; // 30 seconds
 
 export default function DashboardScreen() {
+  const { t } = useTranslation();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [stats, setStats] = useState<DashboardStats>(emptyStats);
   const [recentOrders, setRecentOrders] = useState<OrderRow[]>([]);
@@ -65,12 +68,12 @@ export default function DashboardScreen() {
   if (isLoading && recentOrders.length === 0) return <LoadingIndicator />;
 
   const cards: { label: string; value: string }[] = [
-    { label: 'Products', value: String(stats.products) },
-    { label: 'Total orders', value: String(stats.orders) },
-    { label: 'Customers', value: String(stats.customers) },
-    { label: 'Pending orders', value: String(stats.pendingOrders) },
-    { label: 'Open tickets', value: String(stats.openTickets) },
-    { label: 'In-progress chats', value: String(stats.inProgressTickets) },
+    { label: t('dashboard.products'), value: String(stats.products) },
+    { label: t('dashboard.totalOrders'), value: String(stats.orders) },
+    { label: t('dashboard.customers'), value: String(stats.customers) },
+    { label: t('dashboard.pendingOrders'), value: String(stats.pendingOrders) },
+    { label: t('dashboard.openTickets'), value: String(stats.openTickets) },
+    { label: t('dashboard.inProgressChats'), value: String(stats.inProgressTickets) },
   ];
 
   return (
@@ -84,7 +87,10 @@ export default function DashboardScreen() {
       windowSize={10}
       ListHeaderComponent={
         <View>
-          <Text style={styles.h1}>Overview</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Text style={styles.h1}>{t('dashboard.overview')}</Text>
+            <LanguageToggle />
+          </View>
           <View style={styles.grid}>
             {cards.map((c) => (
               <View key={c.label} style={styles.gridItem}>
@@ -92,7 +98,7 @@ export default function DashboardScreen() {
               </View>
             ))}
           </View>
-          <Text style={[styles.h1, { marginTop: 12 }]}>Recent orders</Text>
+          <Text style={[styles.h1, { marginTop: 12 }]}>{t('dashboard.recentOrders')}</Text>
         </View>
       }
       renderItem={({ item }) => (
