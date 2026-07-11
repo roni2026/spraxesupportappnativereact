@@ -5,7 +5,7 @@ export const CategoryRepository = {
   async getCategories(): Promise<Category[]> {
     const { data, error } = await supabase
       .from('categories')
-      .select('*')
+      .select('id, name, description, image_url, sort_order, is_active')
       .order('sort_order', { ascending: true });
     if (error) throw error;
     return (data as Category[]) ?? [];

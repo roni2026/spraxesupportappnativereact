@@ -52,6 +52,9 @@ export default function FeatureCardsScreen() {
           data={cards}
           keyExtractor={(c, idx) => String(c.id ?? idx)}
           contentContainerStyle={{ padding: 16 }}
+          removeClippedSubviews
+          maxToRenderPerBatch={10}
+          windowSize={10}
           renderItem={({ item }) => (
             <View style={styles.card}>
               <View style={{ flex: 1 }}>

@@ -39,6 +39,9 @@ export default function CustomersScreen() {
           data={customers}
           keyExtractor={(c) => c.id}
           contentContainerStyle={{ paddingHorizontal: 16 }}
+          removeClippedSubviews
+          maxToRenderPerBatch={10}
+          windowSize={10}
           renderItem={({ item }) => (
             <Pressable style={styles.card} onPress={() => navigation.navigate('CustomerDetail', { customerId: item.id })}>
               <Text style={styles.name}>{displayName(item)}</Text>

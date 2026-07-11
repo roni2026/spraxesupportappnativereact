@@ -25,6 +25,9 @@ export default function InvoicesScreen() {
       data={invoices}
       keyExtractor={(i) => i.id}
       contentContainerStyle={{ padding: 16 }}
+      removeClippedSubviews
+      maxToRenderPerBatch={10}
+      windowSize={10}
       renderItem={({ item }) => (
         <View style={styles.card}>
           <Text style={styles.number}>{item.invoice_number ?? item.id.slice(0, 8)}</Text>

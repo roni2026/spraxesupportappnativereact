@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -12,13 +12,33 @@ const emptyStats: DashboardStats = {
   products: 0, orders: 0, customers: 0, pendingOrders: 0, openTickets: 0, inProgressTickets: 0, pendingSellerApps: 0,
 };
 
+// Module-level cache so re-focusing the Dashboard tab doesn't re-fetch every time.
+interface DashboardCacheData {
+  stats: DashboardStats;
+  recentOrders: OrderRow[];
+}
+let dashboardCache: { data: DashboardCacheData; timestamp: number } | null = null;
+const CACHE_TTL = 30_000; // 30 seconds
+
 export default function DashboardScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [stats, setStats] = useState<DashboardStats>(emptyStats);
   const [recentOrders, setRecentOrders] = useState<OrderRow[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const isFetchingRef = useRef(false);
 
-  const refresh = useCallback(() => {
+  const refresh = useCallback((force = false) => {
+    // Use cache if fresh and not forcing a refresh
+    if (!force && dashboardCache && Date.now() - dashboardCache.timestamp < CACHE_TTL) {
+      setStats(dashboardCache.data.stats);
+      setRecentOrders(dashboardCache.data.recentOrders);
+      setIsLoading(false);
+      return;
+    }
+
+    if (isFetchingRef.current) return;
+    isFetchingRef.current = true;
+
     let active = true;
     (async () => {
       setIsLoading(true);
@@ -27,15 +47,20 @@ export default function DashboardScreen() {
           DashboardRepository.getStats(),
           DashboardRepository.getRecentOrders(),
         ]);
-        if (active) { setStats(s); setRecentOrders(o); }
+        if (active) {
+          setStats(s);
+          setRecentOrders(o);
+          dashboardCache = { data: { stats: s, recentOrders: o }, timestamp: Date.now() };
+        }
       } finally {
         if (active) setIsLoading(false);
+        isFetchingRef.current = false;
       }
     })();
     return () => { active = false; };
   }, []);
 
-  useFocusEffect(refresh);
+  useFocusEffect(useCallback(() => { refresh(); }, [refresh]));
 
   if (isLoading && recentOrders.length === 0) return <LoadingIndicator />;
 
@@ -54,6 +79,9 @@ export default function DashboardScreen() {
       contentContainerStyle={{ padding: 16 }}
       data={recentOrders}
       keyExtractor={(o) => o.id}
+      removeClippedSubviews
+      maxToRenderPerBatch={10}
+      windowSize={10}
       ListHeaderComponent={
         <View>
           <Text style={styles.h1}>Overview</Text>

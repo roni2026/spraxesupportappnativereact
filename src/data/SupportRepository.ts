@@ -11,7 +11,7 @@ import { SupportMessage, SupportTicket } from '../types/models';
  */
 export const SupportRepository = {
   async getTickets(statusFilter?: string | null): Promise<SupportTicket[]> {
-    let q = supabase.from('support_tickets').select('*');
+    let q = supabase.from('support_tickets').select('id, ticket_number, user_id, type, subject, message, status, priority, order_id, assigned_to, created_at, updated_at');
     if (statusFilter && statusFilter !== 'all') q = q.eq('status', statusFilter);
     const { data, error } = await q.order('updated_at', { ascending: false });
     if (error) throw error;
@@ -19,7 +19,7 @@ export const SupportRepository = {
   },
 
   async getTicket(id: string): Promise<SupportTicket | null> {
-    const { data, error } = await supabase.from('support_tickets').select('*').eq('id', id).maybeSingle();
+    const { data, error } = await supabase.from('support_tickets').select('id, ticket_number, user_id, type, subject, message, status, priority, order_id, assigned_to, created_at, updated_at').eq('id', id).maybeSingle();
     if (error) throw error;
     return (data as SupportTicket) ?? null;
   },
@@ -44,7 +44,7 @@ export const SupportRepository = {
   async getMessages(ticketId: string): Promise<SupportMessage[]> {
     const { data, error } = await supabase
       .from('support_messages')
-      .select('*')
+      .select('id, ticket_id, sender_id, sender_role, message, is_read, created_at')
       .eq('ticket_id', ticketId)
       .order('created_at', { ascending: true });
     if (error) throw error;

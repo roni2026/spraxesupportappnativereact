@@ -49,6 +49,9 @@ export default function SellerApplicationsScreen() {
           data={applications}
           keyExtractor={(a) => a.id}
           contentContainerStyle={{ paddingHorizontal: 16 }}
+          removeClippedSubviews
+          maxToRenderPerBatch={10}
+          windowSize={10}
           renderItem={({ item }) => (
             <View style={styles.card}>
               <View style={styles.rowBetween}>

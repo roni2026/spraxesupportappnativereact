@@ -5,7 +5,7 @@ export const DiscountRepository = {
   async getCodes(): Promise<DiscountCode[]> {
     const { data, error } = await supabase
       .from('discount_codes')
-      .select('*')
+      .select('id, code, discount_type, discount_value, min_purchase, max_uses, current_uses, valid_until, is_active')
       .order('created_at', { ascending: false });
     if (error) throw error;
     return (data as DiscountCode[]) ?? [];

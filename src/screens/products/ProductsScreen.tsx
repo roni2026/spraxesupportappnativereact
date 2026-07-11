@@ -49,6 +49,9 @@ export default function ProductsScreen() {
           data={products}
           keyExtractor={(p) => p.id}
           contentContainerStyle={{ paddingHorizontal: 16, paddingVertical: 4 }}
+          removeClippedSubviews
+          maxToRenderPerBatch={10}
+          windowSize={10}
           renderItem={({ item }) => (
             <Pressable style={styles.card} onPress={() => navigation.navigate('ProductEdit', { productId: item.id })}>
               <FallbackImage url={thumbnailUrl(item)} style={styles.thumb} />

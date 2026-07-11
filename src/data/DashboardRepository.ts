@@ -6,7 +6,7 @@ async function countRows(
   table: string,
   filter?: { column: string; value: string }
 ): Promise<number> {
-  let q = supabase.from(table).select('*', { count: 'exact', head: true });
+  let q = supabase.from(table).select('id', { count: 'exact', head: true });
   if (filter) q = q.eq(filter.column, filter.value);
   const { count, error } = await q;
   if (error) throw error;
@@ -32,7 +32,7 @@ export const DashboardRepository = {
   async getRecentOrders(limitCount = 10): Promise<OrderRow[]> {
     const { data, error } = await supabase
       .from('orders')
-      .select('*')
+      .select('id, order_number, user_id, total, status, payment_status, payment_method, created_at')
       .order('created_at', { ascending: false })
       .limit(limitCount);
     if (error) throw error;

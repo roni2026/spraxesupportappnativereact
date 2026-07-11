@@ -4,7 +4,7 @@ import { Product } from '../types/models';
 /** Full product catalog management: create, edit, delete, toggle active/featured. */
 export const ProductRepository = {
   async getProducts(query?: string | null, categoryId?: string | null): Promise<Product[]> {
-    let q = supabase.from('products').select('*');
+    let q = supabase.from('products').select('id, name, slug, price, base_price, images, category_id, stock_quantity, is_active, is_featured, total_sales, created_at');
     if (query && query.trim().length > 0) q = q.ilike('name', `%${query}%`);
     if (categoryId && categoryId.trim().length > 0) q = q.eq('category_id', categoryId);
     const { data, error } = await q.order('created_at', { ascending: false });
@@ -13,7 +13,7 @@ export const ProductRepository = {
   },
 
   async getProduct(id: string): Promise<Product | null> {
-    const { data, error } = await supabase.from('products').select('*').eq('id', id).maybeSingle();
+    const { data, error } = await supabase.from('products').select('id, name, slug, description, price, base_price, images, category_id, stock_quantity, is_active, is_featured, total_sales, created_at').eq('id', id).maybeSingle();
     if (error) throw error;
     return (data as Product) ?? null;
   },

@@ -65,6 +65,9 @@ export default function OrdersScreen() {
           data={orders}
           keyExtractor={(o) => o.id}
           contentContainerStyle={{ padding: 16 }}
+          removeClippedSubviews
+          maxToRenderPerBatch={10}
+          windowSize={10}
           renderItem={({ item }) => (
             <Pressable style={styles.card} onPress={() => navigation.navigate('OrderDetail', { orderId: item.id })}>
               <View style={styles.rowBetween}>

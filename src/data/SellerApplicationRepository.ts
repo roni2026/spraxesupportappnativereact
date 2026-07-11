@@ -3,7 +3,7 @@ import { SellerApplication } from '../types/models';
 
 export const SellerApplicationRepository = {
   async getApplications(statusFilter?: string | null): Promise<SellerApplication[]> {
-    let q = supabase.from('seller_applications').select('*');
+    let q = supabase.from('seller_applications').select('id, user_id, shop_name, shop_description, business_address, phone, email, status, rejection_reason, created_at');
     if (statusFilter && statusFilter !== 'all') q = q.eq('status', statusFilter);
     const { data, error } = await q.order('created_at', { ascending: false });
     if (error) throw error;

@@ -72,6 +72,9 @@ export default function ChatListScreen() {
           data={tickets}
           keyExtractor={(t) => t.id}
           contentContainerStyle={{ padding: 16 }}
+          removeClippedSubviews
+          maxToRenderPerBatch={10}
+          windowSize={10}
           renderItem={({ item }) => (
             <Pressable style={styles.card} onPress={() => navigation.navigate('ChatThread', { ticketId: item.id })}>
               <View style={styles.rowBetween}>

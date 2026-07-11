@@ -6,7 +6,7 @@ export const InvoiceRepository = {
   async getInvoices(): Promise<Invoice[]> {
     const { data, error } = await supabase
       .from('invoices')
-      .select('*')
+      .select('id, order_id, invoice_number, total, status, created_at')
       .order('created_at', { ascending: false });
     if (error) throw error;
     return (data as Invoice[]) ?? [];

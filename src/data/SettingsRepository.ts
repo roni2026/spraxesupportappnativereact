@@ -3,7 +3,7 @@ import { SiteSetting } from '../types/models';
 
 export const SettingsRepository = {
   async getSettings(): Promise<SiteSetting[]> {
-    const { data, error } = await supabase.from('site_settings').select('*');
+    const { data, error } = await supabase.from('site_settings').select('id, key, value, updated_at');
     if (error) throw error;
     return (data as SiteSetting[]) ?? [];
   },

@@ -27,7 +27,7 @@ export const AuthRepository = {
 
     const { data, error } = await supabase
       .from('profiles')
-      .select('*')
+      .select('id, full_name, email, phone, address, role, created_at')
       .eq('id', userId)
       .maybeSingle();
     if (error) throw error;
@@ -45,7 +45,7 @@ export const AuthRepository = {
   async getCurrentProfile(): Promise<Profile | null> {
     const userId = await this.getCurrentUserId();
     if (!userId) return null;
-    const { data } = await supabase.from('profiles').select('*').eq('id', userId).maybeSingle();
+    const { data } = await supabase.from('profiles').select('id, full_name, email, phone, address, role, created_at').eq('id', userId).maybeSingle();
     return (data as Profile) ?? null;
   },
 

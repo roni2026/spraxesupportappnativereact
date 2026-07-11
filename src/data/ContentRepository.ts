@@ -6,7 +6,7 @@ export const ContentRepository = {
   async getFeaturedImages(): Promise<FeaturedImage[]> {
     const { data, error } = await supabase
       .from('featured_images')
-      .select('*')
+      .select('id, title, description, image_url, sort_order, is_active')
       .order('sort_order', { ascending: true });
     if (error) throw error;
     return (data as FeaturedImage[]) ?? [];
@@ -42,7 +42,7 @@ export const ContentRepository = {
   async getFeatureCards(): Promise<FeatureCard[]> {
     const { data, error } = await supabase
       .from('feature_cards')
-      .select('*')
+      .select('id, title, description, icon, image_url, sort_order, is_active')
       .order('sort_order', { ascending: true });
     if (error) throw error;
     return (data as FeatureCard[]) ?? [];

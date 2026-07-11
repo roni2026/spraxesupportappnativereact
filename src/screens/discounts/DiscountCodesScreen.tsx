@@ -52,6 +52,9 @@ export default function DiscountCodesScreen() {
           data={codes}
           keyExtractor={(c, idx) => String(c.id ?? idx)}
           contentContainerStyle={{ padding: 16 }}
+          removeClippedSubviews
+          maxToRenderPerBatch={10}
+          windowSize={10}
           renderItem={({ item }) => {
             const suffix = item.discount_type === 'percentage' ? '%' : CURRENCY;
             const usesMax = item.max_uses != null ? `/${item.max_uses}` : '';
