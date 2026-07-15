@@ -5,6 +5,7 @@ import {
 import { Image as ExpoImage } from 'expo-image';
 import { colors, statusColors } from '../theme/colors';
 import { theme, titleCase } from '../theme/theme';
+import { optimizeImageUrl } from '../lib/cloudinary';
 
 export function LoadingIndicator({ style }: { style?: ViewStyle }) {
   return (
@@ -41,11 +42,28 @@ export function StatCard({ label, value }: { label: string; value: string }) {
 }
 
 /** expo-image with a neutral placeholder box when the url is missing (FallbackImage). */
-export function FallbackImage({ url, style }: { url?: string | null; style?: ViewStyle }) {
-  if (!url || url.trim().length === 0) {
+export function FallbackImage({
+  url,
+  style,
+  widthHint = 400,
+}: {
+  url?: string | null;
+  style?: ViewStyle;
+  widthHint?: number;
+}) {
+  const optimized = optimizeImageUrl(url, widthHint);
+  if (!optimized || optimized.trim().length === 0) {
     return <View style={[{ backgroundColor: theme.colors.surfaceVariant }, style]} />;
   }
-  return <ExpoImage source={{ uri: url }} style={style as any} contentFit="cover" transition={200} />;
+  return (
+    <ExpoImage
+      source={{ uri: optimized }}
+      style={style as any}
+      contentFit="cover"
+      cachePolicy="memory-disk"
+      transition={120}
+    />
+  );
 }
 
 export function ConfirmDialog({
